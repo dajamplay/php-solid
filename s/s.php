@@ -57,7 +57,7 @@ class Logger {
 }
 $logger = new Logger();
 
-$product = new Product($product);
+$product = new Product($logger);
 
 $product->setPrice(100);
 
