@@ -7,9 +7,9 @@
 
 class Product {
 
-    private Logger $logger;
+    private ILogger $logger;
 
-    public function __construct(Logger $logger)
+    public function __construct(ILogger $logger)
     {
         $this->logger = $logger;
     }
@@ -25,19 +25,35 @@ class Product {
 
 }
 
-class Logger {
+class FileLogger implements ILogger {
+
+    private function saveToFile($message) {
+        //...
+    }
 
     public function log($message) {
-        //...
         $this->saveToFile($message);
     }
 
-    private function saveToFile($message) {
-        echo $message;
+}
+
+class DBLogger implements ILogger {
+
+    private function saveToDB($message) {
+        //...
+    }
+
+    public function log($message) {
+        $this->saveToDB($message);
     }
 
 }
-$logger = new Logger();
+
+interface ILogger {
+    public function log($message);
+}
+
+$logger = new DBLogger();
 
 $product = new Product($logger);
 
